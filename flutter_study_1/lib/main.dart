@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -100,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           //
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
+          // action in the IDE, or press "p" in thNae console), to see the
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -108,6 +109,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Text('Input'),
+            TextInput(
+              onChanged: (text) {
+                // Handle text input changes
+                print('Input changed: $text');
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter text',
+              ),
             ),
           ],
         ),
