@@ -1,33 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study_1/Dtos/login_user_model.dart';
+import 'package:flutter_study_1/main.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CustomInputWidget extends StatefulWidget
+class CustomInputWidget extends ConsumerStatefulWidget
 {
   const CustomInputWidget({super.key});
   @override
   _CustomInputWidgetState createState() => _CustomInputWidgetState();
+
 }
 
-class _CustomInputWidgetState extends State<CustomInputWidget> {
+class _CustomInputWidgetState extends ConsumerState<CustomInputWidget> {
+  LoginUserModel userModel = LoginUserModel();
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    var serviece=ref.watch(myProvider);
+    userModel=serviece.create<LoginUserModel>();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextField(
-          decoration: InputDecoration(
-            labelText: 'Enter text',
-            border: OutlineInputBorder(),
+        Expanded(
+          child:TextField(
+          
+            decoration: InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder(),
+            ),
+            onChanged: (value) {
+              // Handle text input changes
+              setState(() {
+                userModel.email = value; // Assuming email is the first field
+              });
+            },
           ),
-          onChanged: (value) {
-            // Handle text input changes
-          },
-        ),
-        SizedBox(height: 20),
+          ),
+
+        SizedBox(width: 20),
         ElevatedButton(
-          onPressed: () {
-            // Handle button press
-          },
-          child: Text('Submit'),
-        ),
+            onPressed: () {
+              // Handle button press
+            },
+            child: Text('Submit'),
+          ),
       ],
     );
   }

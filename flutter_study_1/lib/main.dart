@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_study_1/services/model_factory.dart';
 import 'package:flutter_study_1/widgets/custom_input_widget.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final myProvider=Provider((ref)=>ModelFactory());
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(child: MyApp())
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -107,14 +113,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   child: CustomInputWidget()
                 ),
                 Container(
-                  child: ,
+                  child: const Text('You have pushed the button this many times:')
                 ),
-                const Text('You have pushed the button this many times:'),
                 Text(
                   '$_counter',
                   style: Theme.of(context).textTheme.headlineMedium,
