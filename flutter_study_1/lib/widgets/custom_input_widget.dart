@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_study_1/Dtos/login_user_model.dart';
 import 'package:flutter_study_1/main.dart';
+import 'package:flutter_study_1/tesservice/model_factory.dart';
+import 'package:flutter_study_1/viewModel/login_view_model.dart';
 
 class CustomInputWidget extends ConsumerStatefulWidget
 {
@@ -13,17 +16,21 @@ class CustomInputWidget extends ConsumerStatefulWidget
 
 class _CustomInputWidgetState extends ConsumerState<CustomInputWidget> {
   LoginUserModel userModel = LoginUserModel();
-
+  
   @override
   Widget build(BuildContext context) {
-    var serviece=ref.watch(myProvider);
-    userModel=serviece.create<LoginUserModel>();
+    //サービスから取得
+    //var result=services.get<ModelFactory>();
+    //var serviece=ref.watch(result);
+    //userModel=serviece.create<LoginUserModel>();
+    
+    var model=ref.watch(loginViewModelProvicer);
+    debugPrint('CustomInputWidget: userModel.email=${model}');
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
           child:TextField(
-          
             decoration: InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(),
@@ -31,7 +38,8 @@ class _CustomInputWidgetState extends ConsumerState<CustomInputWidget> {
             onChanged: (value) {
               // Handle text input changes
               setState(() {
-                userModel.email = value; // Assuming email is the first field
+                model.email= value; // Assuming email is the first field
+                debugPrint('Email changed: ${value}');
               });
             },
           ),

@@ -1,20 +1,16 @@
-class LoginUserModel{
-  String? email;
-  String? password;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  LoginUserModel({this.email, this.password});
+part 'login_user_model.freezed.dart';
+part 'login_user_model.g.dart';
 
-  Map<String, dynamic> toJson() {
-    return {
-      'email': email,
-      'password': password,
-    };
-  }
+@unfreezed
+abstract class LoginUserModel with _$LoginUserModel {
 
-  factory LoginUserModel.fromJson(Map<String, dynamic> json) {
-    return LoginUserModel(
-      email: json['email'],
-      password: json['password'],
-    );
-  }
+  factory LoginUserModel({
+    String? email,
+    String? password
+  }) = _LoginUserModel;
+
+  factory LoginUserModel.fromJson(Map<String,Object?> json) => _$LoginUserModelFromJson(json);
 }
+

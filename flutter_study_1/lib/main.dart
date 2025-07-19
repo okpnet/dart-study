@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_study_1/services/model_factory.dart';
+import 'package:flutter_study_1/services/static_provider_factory.dart';
+import 'package:flutter_study_1/tesservice/model_factory.dart';
+import 'package:flutter_study_1/tesservice/test_static_service_factory.dart';
 import 'package:flutter_study_1/widgets/custom_input_widget.dart';
 
-
-final myProvider=Provider((ref)=>ModelFactory());
+final services=StaticProviderFactory(TestStaticServiceFactory());
+//final myProvider=Provider((ref)=>ModelFactory());
 
 void main() {
   runApp(
